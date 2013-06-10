@@ -1,0 +1,57 @@
+------------------------------------------------------------------
+@author Hans Svensson <hans.svensson@quviq.com>
+@copyright (C) 2013, Quviq AB
+
+@title WebDriver implementation for Erlang
+
+@doc 
+
+This package contains an implementation of the WebDriver API in Erlang. The WebDriver API
+provides a platform- and language-neutral interface that allows programs to control the
+behavior and inspect the state of a web browser. It is mainly intended for automated
+tests, but can also be used to control a browser for other purposes.
+
+The WebDriver API is accessed via http-requests, data is serialized using JSON. 
+
+This package contains two levels; one purerly functional level, where separate WebDriver
+commands can be made, and a gen_server based level, wrapping the concept of a WebDriver
+session (i.e. an interaction with a browser instance).
+
+The WebDriver API is currently being standardized by W3C (the latest working draft when
+writing this is from May 30th 2013), however the main implementors of the server-side of
+WebDriver (like Selenium and ChromeDriver) still follow the protocol as described by
+Selenium (<a href="https://code.google.com/p/selenium/wiki/JsonWireProtocol">The WebDriver
+Wire Protocol</a>).
+
+This implementation spans most of what is covered by the Wire Protocol, with the exception
+of the Touch interface, Geographical location and local storage. Extending with these
+things should be straightforward but we have not seen a usage of this functionality yet. 
+
+The package also contains tests, in the form of a <a
+href="http://quviq.com/">QuickCheck</a> model, testing both the session wrapper and the
+Wire Protocol. Page navigation, window control and element location is well tested, while
+page element interaction and cookies remains as TODO.
+
+<h2>License</h2>
+<pre>
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. </pre>
+@end
+------------------------------------------------------------------
