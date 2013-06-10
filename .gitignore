@@ -3,3 +3,5 @@ deps
 *.o
 *.beam
 *.plt
+.eqc-info
+current_counterexample.eqc
