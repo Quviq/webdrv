@@ -31,7 +31,6 @@
 
 -include_lib("eqc/include/eqc.hrl").
 -include_lib("eqc/include/eqc_statem.hrl").
--import(eqc_statem, [eq/2]).
 
 -compile(export_all).
 
@@ -54,7 +53,7 @@
         [{2, {selenium, htmlunit}},
          {1, {selenium, chrome}},
          {1, {selenium, firefox}},
-         {1, {chromedriver, chrome}} ]).
+         {1, {chromedriver, chrome}}]).
 
 -define(WINDOWBASE,  "WINDOW-").
 -define(SESSIONBASE, "SESS-").
@@ -206,7 +205,7 @@ which_timeout() ->
   elements(["script", "implicit", "page load"]).
 
 timeout_val() ->
-  choose(100, 500).
+  choose(100, 10000).
 
 implicit_timeout_val() ->
   weighted_default({3, 0}, {1, choose(1, 30)}).
