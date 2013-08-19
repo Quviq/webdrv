@@ -571,6 +571,10 @@ httpc_request_bug_fix(Opts, post, Request={_Url, Headers, _, _}) ->
     _Res = {ok, {{_, 302, _}, OutHdrs, _Body}} ->
       Redirect = proplists:get_value("location", OutHdrs, ""),
       httpc:request(get, {Redirect, [{"Accept", "application/json"}]}, [Timeout], []);
+    % Fix ios-driver
+    _Res = {ok, {{_, 301, _}, OutHdrs, _Body}} ->
+      Redirect = proplists:get_value("location", OutHdrs, ""),
+      httpc:request(get, {Redirect, [{"Accept", "application/json"}]}, [Timeout], []);
     Res ->
       Res
   end;
