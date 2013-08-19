@@ -35,7 +35,8 @@
 
 -export([default/0, default_browser/1,
          to_json/1,
-         default_firefox/0, default_chrome/0, default_htmlunit/0]).
+         default_firefox/0, default_chrome/0, default_htmlunit/0, 
+         default_safari/1]).
 
 %% @doc Return the default capability record.
 -spec default() -> #capability{}.
@@ -63,6 +64,11 @@ default_htmlunit() ->
 -spec default_firefox() -> #capability{}.
 default_firefox() ->
   (default())#capability{ browserName = <<"firefox">> }.
+
+%% @doc Return the default capability with browser set to <tt>firefox</tt>.
+-spec default_safari(string()) -> #capability{}.
+default_safari(Device) ->
+  (default())#capability{ browserName = <<"Safari">>, device = Device }.
 
 %% @doc Convert a capability (possibly <tt>null</tt>) to JSON format. Function is
 %% idempotent, i.e. converting an already converted object is fine.

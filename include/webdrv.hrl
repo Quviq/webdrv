@@ -35,6 +35,7 @@
         , platform = <<"ANY">>
         %% , platformVersion
         , javascriptEnabled = true
+        , device = <<"">>
         }).
 
 -record(webdrv_opts, { url, timeout = 5000, session_id = null }).
