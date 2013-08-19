@@ -96,7 +96,7 @@
 -spec start_session(atom(), url(), capability()) ->
                        {ok, pid()} | request_error().
 start_session(Name, Url, DesiredCapabilities) ->
-  start_session(Name, Url, DesiredCapabilities, null, 5000).
+  start_session(Name, Url, DesiredCapabilities, null, 10000).
 
 %% @equiv start_session(Name, Url, DesiredCapabilities, null, ConnTimeout)
 -spec start_session(atom(), url(), capability(), number()) ->
