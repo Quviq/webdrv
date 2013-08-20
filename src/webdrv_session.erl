@@ -111,6 +111,7 @@ start_session(Name, Url, DesiredCapabilities, ConnTimeout) ->
 -spec start_session(atom(), url(), capability(), capability(), number()) ->
                        {ok, pid()} | request_error().
 start_session(Name, Url, DesiredCapabilities, RequiredCapabilities, ConnTimeout) ->
+  inets:start(),
   case webdrv_wire:start_session(#webdrv_opts{ url = Url, timeout = ConnTimeout },
                                  DesiredCapabilities, RequiredCapabilities) of
     {ok, SessionId, Capabilities} ->
@@ -119,7 +120,6 @@ start_session(Name, Url, DesiredCapabilities, RequiredCapabilities, ConnTimeout)
 
     Err -> {error, Err}
   end.
-
 
 -spec stop_session(atom()) -> ok.
 stop_session(Name) ->
