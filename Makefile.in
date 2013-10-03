@@ -1,0 +1,36 @@
+PREFIX=@prefix@
+VERSION=1.0
+RELDIR=./rel/webdrv-$(VERSION)
+ERL=@WithErl@
+
+all: compile doc
+.PHONY: test doc
+
+compile: 
+	@(cd src; $(ERL) -make)
+
+test: 
+ifeq (@ERLANG_LIB_VER_eqc@, not found)
+	@(echo "Cannot test without QuickCheck installed.")
+else
+	@(cd test; $(ERL) -make)
+endif
+
+doc:
+	erl -eval "edoc:application(webdrv,\".\",[{dir, \"./doc\"}, {preprocess, true}])" \
+	-s init stop -noshell
+
+release: compile
+	rm -rf $(RELDIR);\
+	mkdir -p $(RELDIR);\
+	cp -r ebin doc include $(RELDIR)
+
+install: release
+	mkdir -p $(PREFIX)
+	cp -r $(RELDIR) $(PREFIX)/
+
+clean:
+	rm -f ebin/*.beam; \
+	rm -f doc/*.html; \
+	rm -f doc/*.png doc/*info doc/*.css; \
+	rm -rf rel

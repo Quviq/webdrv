@@ -1,0 +1,40 @@
+dnl
+dnl webdrv configure script
+dnl
+
+AC_INIT(Makefile.in)
+
+dnl check if eqc is installed
+AC_ERLANG_CHECK_LIB([eqc],
+  [],
+  [AC_MSG_WARN([QuickCheck not found.])])
+
+dnl allow a different Erlang compiler to be specified
+AC_ARG_WITH(erl,
+[  --with-erl=<erlang compiler>
+       Use a command different from 'erl' to compile Erlang code.
+],
+[WithErl="$withval"],
+[WithErl=$ERL]
+)
+AC_SUBST(WithErl)
+
+if test "$WithErl" = "" -o "$WithErl" = "no"; then
+  AC_MSG_ERROR([Cannot continue without Erlang compiler!])
+fi
+
+if test "$WithErl" != "$ERL"; then
+  AC_MSG_WARN([Using $WithErl as Erlang compiler.])
+fi
+
+AC_PREFIX_DEFAULT(/usr/local/lib/erlang/lib)
+
+dnl read Makefile.in and write Makefile
+AC_OUTPUT(Makefile)
+
+dnl How to continue
+echo "****************************************************"
+echo "Configuration done."
+echo "Type \"make\" in order to build webdrv, then,"
+echo "optionally, \"make install\" to install webdrv."
+echo "****************************************************"
