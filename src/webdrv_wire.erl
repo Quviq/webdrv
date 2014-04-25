@@ -299,7 +299,7 @@ element_name(Opts, ElementId) ->
 
 -spec clear_element(#webdrv_opts{}, jsonstr()) -> request_res().
 clear_element(Opts, ElementId) ->
-  do_post_ecmd(Opts, ElementId, "name", []).
+  do_post_ecmd(Opts, ElementId, "clear", []).
 
 -spec is_selected_element(#webdrv_opts{}, jsonstr()) -> request_res().
 is_selected_element(Opts, ElementId) ->
