@@ -358,7 +358,7 @@ send_keys(Name, Value) ->
 
 -spec element_name(atom(), string()) -> {ok, string()} | request_error().
 element_name(Name, ElementId) ->
-  mkRes(gen_server:call(Name, {element_name, sid, ElementId}, ?TIMEOUT), ok).
+  mkRes(gen_server:call(Name, {element_name, sid, ElementId}, ?TIMEOUT), fun check_str/1).
 
 -spec clear_element(atom(), string()) -> ok | request_error().
 clear_element(Name, ElementId) ->
